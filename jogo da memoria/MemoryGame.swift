@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MemoryGame<CardContent> where CardContent: Equatable {
     var cards: Array<Card>
+    var points: Int
     
     var indexOfTheOneAndOnlyFaceUpCard: Int? {
         get { cards.indices.filter{ cards[$0].isFaceUp}.only}
@@ -25,6 +26,18 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
                 if cards[chosenIndex].content == cards[potetialMatchIndex].content {
                     cards[chosenIndex].isMatched = true
                     cards[potetialMatchIndex].isMatched = true
+                    points += 2
+                } else {
+                    if cards[chosenIndex].wasSeen {
+                        points -= 1
+                    } else {
+                        cards[chosenIndex].wasSeen = true
+                    }
+                    if cards[potetialMatchIndex].wasSeen {
+                        points -= 1
+                    } else {
+                        cards[potetialMatchIndex].wasSeen = true
+                    }
                 }
                 cards[chosenIndex].isFaceUp = true
             } else {
@@ -41,11 +54,13 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
             cards.append(Card(content: content, id: pairIndex*2 + 1))
         }
         cards.shuffle()
+        points = 0
     }
     
     struct Card: Identifiable {
         var isFaceUp = false
         var isMatched = false
+        var wasSeen = false
         var content: CardContent
         var id: Int
     }

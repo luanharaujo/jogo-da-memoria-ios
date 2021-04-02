@@ -18,9 +18,17 @@ struct EmojiContentView: View {
                     viewModel.choose(card: card)
                 }
                 //.aspectRatio(2/3, contentMode: .fit)
+            }.padding().foregroundColor(viewModel.color)
+            HStack {
+                Text("Points: \(viewModel.points)")
+                ZStack {
+                    RoundedRectangle(cornerRadius:5).fill(Color.gray).aspectRatio(10/1, contentMode: .fit)
+                    Text("New Game")
+                }.onTapGesture {
+                    viewModel.newGame()
+                }
+                
             }
-            .padding()
-            .foregroundColor(viewModel.color)
         }
     }
 }
