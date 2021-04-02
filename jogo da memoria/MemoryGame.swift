@@ -5,7 +5,7 @@
 //  Created by Luan Araujo on 14/03/21.
 //
 
-import Foundation
+import SwiftUI
 
 struct MemoryGame<CardContent> where CardContent: Equatable {
     var cards: Array<Card>
