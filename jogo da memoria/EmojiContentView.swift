@@ -22,7 +22,7 @@ struct EmojiContentView: View {
             HStack {
                 Text("Points: \(viewModel.points)")
                 ZStack {
-                    RoundedRectangle(cornerRadius:5).fill(Color.gray).aspectRatio(10/1, contentMode: .fit)
+                    RoundedRectangle(cornerRadius:5).fill(Color.gray).aspectRatio(8/1, contentMode: .fit)
                     Text("New Game")
                 }.onTapGesture {
                     viewModel.newGame()
@@ -35,31 +35,26 @@ struct EmojiContentView: View {
 
 struct CardView: View {
     var card: MemoryGame<String>.Card
-    
+    @ViewBuilder
     var body: some View {
         GeometryReader { geometry in
-            ZStack {
-                if card.isFaceUp {
-                    RoundedRectangle(cornerRadius:cornerRadius).fill(Color.white)
-                    RoundedRectangle(cornerRadius:cornerRadius).stroke(lineWidth: edgeLineWidth)
-                    Text(card.content)
-                } else {
-                    if !card.isMatched {
-                        RoundedRectangle(cornerRadius:cornerRadius).fill()
-                    }
+            if card.isFaceUp || !card.isMatched {
+                ZStack {
+                    Pie(startAngle: Angle.degrees(-90), endAngle: Angle.degrees(20), clockWise: true)
+                        .padding(5)
+                        .opacity(0.4)
+                    Text(card.content).font(Font.system(size: fontSize(for: geometry.size)))
                 }
+                .cardify(isFaceUp: card.isFaceUp)
+                .padding(paddingSize)
             }
-            .font(Font.system(size: fontSize(for: geometry.size)))
-            .padding(paddingSize)
         }
     }
     
     // MARK: - Drawing Constants
-    let paddingSize: CGFloat = 5
-    let cornerRadius: CGFloat = 10
-    let edgeLineWidth: CGFloat = 3
-    func fontSize(for size: CGSize) -> CGFloat {
-        min(size.width, size.height) * 0.75
+    private let paddingSize: CGFloat = 5
+    private func fontSize(for size: CGSize) -> CGFloat {
+        min(size.width, size.height) * 0.70
     }
 }
 

@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct MemoryGame<CardContent> where CardContent: Equatable {
-    var cards: Array<Card>
-    var points: Int
+    private(set) var cards: Array<Card>
+    private(set) var points: Int
     
     var indexOfTheOneAndOnlyFaceUpCard: Int? {
         get { cards.indices.filter{ cards[$0].isFaceUp}.only}

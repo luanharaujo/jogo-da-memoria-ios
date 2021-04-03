@@ -13,8 +13,7 @@ let themes = [
     (name: "Vintage", emojis: ["📽","📺","📻","🕰","💡"],color: Color.init(red: 0.6, green: 0.4, blue: 0.2, opacity: 1)),
     (name: "Food", emojis: ["🎂","🍦","🧁","🍩","🍪"],color: Color.yellow),
     (name: "Art", emojis: ["🎪","🤹🏾‍♀️","🎭","🪗","🤸🏼‍♀️"],color: Color.red),
-    (name: "Tech", emojis: ["🏹","🏰","🧝‍♀️","🐉","🗡"],color: Color.gray)
-    
+    (name: "Middle-earth", emojis: ["🏹","🏰","🧝‍♀️","🐉","🗡"],color: Color.gray)
 ]
 
 var chosenTheme: Int = 0
